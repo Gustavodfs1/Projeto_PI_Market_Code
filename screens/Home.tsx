@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { View, Text, TouchableOpacity, Button } from "react-native";
-import { ListItem } from "react-native-elements";
+import { Badge } from "react-native-elements";
 import { Camera, BarCodeScanningResult } from "expo-camera";
 
 import styles from "./homeStyle";

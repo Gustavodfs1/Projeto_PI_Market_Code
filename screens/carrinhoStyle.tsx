@@ -1,5 +1,6 @@
 import React from "react-native";
 import { StyleSheet } from "react-native";
+import Constants from "expo-constants";
 
 const styles = StyleSheet.create({
   card: {
@@ -57,6 +58,14 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignSelf: "center",
     alignContent: "center",
+  },
+  container: {
+    flex: 1,
+    marginTop: Constants.statusBarHeight,
+  },
+  scrollView: {
+    backgroundColor: "white",
+    marginHorizontal: 20,
   },
 });
 export default styles;

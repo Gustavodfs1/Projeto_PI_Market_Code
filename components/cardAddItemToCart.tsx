@@ -1,6 +1,6 @@
 import React from "react";
 import { StyleSheet, View, Text, TouchableOpacity } from "react-native";
-import { Button } from "react-native-elements";
+import { Button, Badge } from "react-native-elements";
 import { Icon } from "react-native-elements";
 import { StackNavigationProp } from "@react-navigation/stack";
 import Carrinho from "../screens/Carrinho";
@@ -37,6 +37,11 @@ const CardAddItemToCart: React.FC<Props> = ({ data, navigation }) => {
           >
             <Icon reverse name="ios-trash" type="ionicon" color="red" />
             <TouchableOpacity onPress={() => navigation.navigate("Carrinho")}>
+              <Badge
+                value="12"
+                status="error"
+                badgeStyle={{ position: "absolute", top: -3, right: -3 }}
+              />
               <Icon reverse name="ios-cart" type="ionicon" color="#d1677a" />
             </TouchableOpacity>
           </View>

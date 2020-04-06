@@ -1,9 +1,12 @@
 import React from "react";
-import { View, TouchableOpacity } from "react-native";
+import { View, TouchableOpacity, SafeAreaView } from "react-native";
 import { ListItem, Card, Text, Icon } from "react-native-elements";
 
 import styles from "./carrinhoStyle";
 import { StackNavigationProp } from "@react-navigation/stack";
+import PagamentoOk from "./PagamentoOk";
+import { ScrollView } from "react-native-gesture-handler";
+import Constants from "expo-constants";
 interface Props {
   navigation: StackNavigationProp<any>;
 }
@@ -39,7 +42,7 @@ const users = [
   },
 ];
 
-export default function Carrinho() {
+const Carrinho: React.FC<Props> = ({ navigation }) => {
   return (
     <>
       <View style={{ flex: 1, backgroundColor: "#fff" }}>
@@ -58,7 +61,10 @@ export default function Carrinho() {
               R$: 183,78
             </Text>
           </Card>
-          <TouchableOpacity style={styles.pagar}>
+          <TouchableOpacity
+            style={styles.pagar}
+            onPress={() => navigation.navigate("PagamentoOk")}
+          >
             <Text style={styles.textPagar}>Pay & Go</Text>
             <Icon name="ios-card" type="ionicon" color="white" />
           </TouchableOpacity>
@@ -71,23 +77,28 @@ export default function Carrinho() {
               borderTopRightRadius: 100,
             }}
           >
-            <View style={styles.card}>
-              {users.map((u, i) => {
-                return (
-                  <ListItem
-                    style={{ backgroundColor: "#fff" }}
-                    chevron={{ color: "#333" }}
-                    bottomDivider
-                    key={i}
-                    title={u.name}
-                    leftAvatar={{ source: { uri: u.avatar } }}
-                  />
-                );
-              })}
-            </View>
+            <SafeAreaView style={styles.container}>
+              <ScrollView style={styles.scrollView}>
+                <View style={styles.card}>
+                  {users.map((u, i) => {
+                    return (
+                      <ListItem
+                        style={{ backgroundColor: "#fff" }}
+                        chevron={{ color: "#333" }}
+                        bottomDivider
+                        key={i}
+                        title={u.name}
+                        leftAvatar={{ source: { uri: u.avatar } }}
+                      />
+                    );
+                  })}
+                </View>
+              </ScrollView>
+            </SafeAreaView>
           </View>
         </View>
       </View>
     </>
   );
-}
+};
+export default Carrinho;

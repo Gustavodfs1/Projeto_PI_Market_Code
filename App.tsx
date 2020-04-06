@@ -4,6 +4,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import LoginScreen from "./components/login";
 import Home from "./screens/Home";
 import Carrinho from "./screens/Carrinho";
+import PagamentoOk from "./screens/PagamentoOk";
 import { createStackNavigator } from "@react-navigation/stack";
 import { AppLoading } from "expo";
 import { Asset } from "expo-asset";
@@ -56,6 +57,14 @@ const App = () => {
         }}
         initialRouteName={inicialState}
       >
+        <Stack.Screen
+          name="PagamentoOk"
+          component={PagamentoOk}
+          options={{
+            headerBackTitleVisible: false,
+            headerShown: false,
+          }}
+        />
         <Stack.Screen name="Carrinho" component={Carrinho} />
         <Stack.Screen
           name="Home"
