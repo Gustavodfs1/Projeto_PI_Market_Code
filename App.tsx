@@ -11,10 +11,18 @@ import { Asset } from "expo-asset";
 import { Image } from "react-native";
 import { Icon } from "react-native-elements";
 import * as Font from "expo-font";
+import Produto from "./model/Produto";
+import CarrinhoContext from "./CarrinhoContext";
 
 const Stack = createStackNavigator();
 
 const App = () => {
+
+  const [produtos, setProdutos] = React.useState<Array<Produto>>([]);
+  const adicionarCarrinho = (produto:Produto)=>{
+    setProdutos(products => [...products, produto]);
+  }
+
   const cacheImages = (images: Array<any>) => {
     return images.map((image) => {
       if (typeof image === "string") {
@@ -49,6 +57,7 @@ const App = () => {
     );
   }
   return (
+    <CarrinhoContext.Provider value={{carrinho:produtos, adicionarCarrinho}}>
     <NavigationContainer>
       <Stack.Navigator
         screenOptions={{
@@ -86,6 +95,7 @@ const App = () => {
         />
       </Stack.Navigator>
     </NavigationContainer>
+    </CarrinhoContext.Provider>
   );
 };
 

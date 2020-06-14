@@ -6,6 +6,8 @@ import { Camera, BarCodeScanningResult } from "expo-camera";
 import styles from "./homeStyle";
 import CardAddItemToCart from "../components/cardAddItemToCart";
 import { StackNavigationProp } from "@react-navigation/stack";
+import Produto from "../model/Produto";
+import CarrinhoContext from "../CarrinhoContext";
 
 interface Props {
   navigation: StackNavigationProp<any>;
@@ -46,8 +48,16 @@ const Home: React.FC<Props> = ({ navigation }) => {
   const [barCode, setBarCode] = useState("");
   const [hasPermission, setHasPermission] = useState<null | boolean>(null);
 
-  const reconhecimentoCode = (scanningResult: BarCodeScanningResult) => {
+  const carrinhoContext = React.useContext(CarrinhoContext);
+
+  const reconhecimentoCode = async (scanningResult: BarCodeScanningResult) => {
     setBarCode(scanningResult.data);
+    //TODO chamar api produto
+    await fetch("URL").then(result => result.json()).then((produto:Produto) => {
+      carrinhoContext.adicionarCarrinho(produto);
+    });
+    //TODO screen de loading
+
   };
 
   useEffect(() => {
